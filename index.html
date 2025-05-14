@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feliz Aniversário, Amor! 💖</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #ffd1dc;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      flex-direction: column;
+      padding-top: 40px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .spotify-player {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100px;
+      background-color: #ffd1dc;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .play-instruction {
+      margin-top: 60px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .card {
+      background: linear-gradient(to bottom, #ffffff, #b8f0b0);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      z-index: 10;
+      margin-top: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .photos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .photos img {
+      width: 90%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .btn {
+      margin-top: 10px;
+      padding: 12px 25px;
+      background: linear-gradient(45deg, #00b4d8, #48cae4);
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #0077b6, #0096c7);
+      transform: scale(1.05);
+    }
+
+    .btn:disabled {
+      background: #333;
+      cursor: default;
+    }
+
+    .emoji-8bit {
+      position: fixed;
+      font-size: 32px;
+      filter: pixelate(8px);
+      animation: float 12s infinite linear;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(-100vh); }
+      100% { transform: translateY(100vh); }
+    }
+
+    #message {
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+  </style>
+</head>
+<body>
+
+<div class="spotify-player">
+  <iframe id="spotifyPlayer" src="https://open.spotify.com/embed/track/3BrWLBC4WYx393yRUOlTih" 
+          width="100%" height="100" frameborder="0" 
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+</div>
+
+<div class="play-instruction">💖 Dê play na música para tornar tudo ainda mais especial! 💖</div>
+
+<div class="card">
+  <h2 id="message">Amor, sei que estamos passando por momentos difíceis...</h2>
+  <div class="photos">
+    <img src="c:\Users\dudi_\Downloads\WhatsApp Image 2025-05-14 at 11.34.49.jpeg" alt="Foto com minha namorada">
+    <img src="c:\Users\dudi_\Downloads\WhatsApp Image 2025-05-14 at 11.37.26.jpeg" alt="Foto com nosso filho">
+  </div>
+  <button class="btn" onclick="showNextMessage()">Próxima mensagem</button>
+</div>
+
+<script>
+  const messages = [
+    "Amor, sei que estamos passando por momentos difíceis...",
+    "Mas quero que você saiba que estou aqui, sempre ao seu lado.",
+    "Nós somos mais fortes juntos. ❤️",
+    "Vou te amar para sempre. Nossa história é linda!",
+    "E juntos, ao lado do Thominhas, vamos superar tudo.",
+    "Te amo mais do que você pode imaginar. Feliz aniversário, meu amor!"
+  ];
+
+  let currentMessage = 0;
+
+  function showNextMessage() {
+    currentMessage++;
+    const messageElement = document.getElementById("message");
+    messageElement.style.opacity = 0;
+    messageElement.style.transform = "translateY(-20px)";
+    setTimeout(() => {
+      if (currentMessage < messages.length) {
+        messageElement.textContent = messages[currentMessage];
+      } else {
+        messageElement.textContent = "🎉 Te vejo hoje à noite! Até mais! 🎉";
+        document.querySelector("button").disabled = true;
+      }
+      messageElement.style.opacity = 1;
+      messageElement.style.transform = "translateY(0)";
+    }, 400);
+  }
+
+  function createEmoji() {
+    const emoji = document.createElement('div');
+    emoji.className = 'emoji-8bit';
+    emoji.textContent = Math.random() > 0.5 ? '❤️' : '🎉';
+    emoji.style.left = Math.random() * 100 + 'vw';
+    emoji.style.animationDuration = (8 + Math.random() * 5) + 's';
+    document.body.appendChild(emoji);
+
+    setTimeout(() => emoji.remove(), 13000);
+  }
+
+  setInterval(createEmoji, 400);
+</script>
+
+</body>
+</html>
